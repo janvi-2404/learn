@@ -62,25 +62,32 @@ class SaleOrder(models.Model):
     commission_order_id = fields.Many2one('commission.on.line', string='Commission Order', readonly=True)
 
     def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()
-        if self.commission_order_id:
-            self.commission_order_id.write({
-                'order_id': self.name,
-                'customer_name': self.user_id.name,
-                'order_date': self.date_order,
-                'commission': self.commission,
-                'total': self.amount_total,
-            })
-        else:
-            commission_order = self.env['commission.on.line'].create({
-                'order_id': self.name,
-                'customer_name': self.user_id.name,
-                'order_date': self.date_order,
-                'commission': self.commission,
-                'total': self.amount_total,
-            })
-            self.commission_order_id = commission_order.id
-        return res
+        for order in self:
+            sale_limit = float(self.env['ir.config_parameter'].sudo().get_param('sale_limit', default=0.0))
+
+            if order.amount_total > sale_limit:
+                order.state = 'to_approve'
+            else:
+                res = super(SaleOrder, order).action_confirm()
+
+                if order.commission_order_id:
+                    order.commission_order_id.write({
+                        'order_id': order.name,
+                        'customer_name': order.user_id.name,
+                        'order_date': order.date_order,
+                        'commission': order.commission,
+                        'total': order.amount_total,
+                    })
+                else:
+                    commission_order = self.env['commission.on.line'].create({
+                        'order_id': order.name,
+                        'customer_name': order.user_id.name,
+                        'order_date': order.date_order,
+                        'commission': order.commission,
+                        'total': order.amount_total,
+                    })
+                    order.commission_order_id = commission_order.id
+        return True
 
     def action_cancel(self):
         res = super(SaleOrder, self).action_cancel()
@@ -142,15 +149,6 @@ class SaleOrder(models.Model):
         return True
 
     state = fields.Selection(selection_add=[('to_approve', "To Approve")])
-
-    def action_confirm(self):
-        # print(self)
-        for order in self:
-            sale_limit = float(self.env['ir.config_parameter'].sudo().get_param('sale_limit'))
-            if order.amount_total > sale_limit:
-                order.state = 'to_approve'
-            else:
-                super(SaleOrder, order).action_confirm()
 
     def action_approve(self):
         self.env['sale.order'].browse(self.id).state = 'sale'
