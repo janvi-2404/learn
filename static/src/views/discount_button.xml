@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.Discount">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onDiscount()">
+            <i class="fa fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
+                <span>% Discount</span>
+        </button>
+    </t>
+
+    <t t-name="Online_shopping.DiscountButton" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt-amount')]" position="after">
+            <t t-if="props.data.note">
+                <div class="custom-note">
+                    Note:
+                    <t t-esc="props.data.note" /> 
+                </div>
+            </t>
+            <t t-if="props.data.location_added">
+                <div class="custom-note">
+                    Location:
+                    <t t-esc="props.data.location_add" /> 
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

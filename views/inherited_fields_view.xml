@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Stock Order Picking Form View -->
+        <record id="stock_order_picking_form_view" model="ir.ui.view">
+            <field name="name">stock.order.picking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="extra_tags"/>
+                </xpath>
+                <xpath expr="//field[@name='picking_type_id']" position="before">
+                    <field name="nick_name"/>
+                </xpath>
+                <xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="image" widget="image"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Facilities Sale Order Form View -->
+        <record id="facilities_sale_order_form_view" model="ir.ui.view">
+            <field name="name">event.facilities.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='tax_id']" position="after">
+                    <field name="extra_tags"/>
+                </xpath>
+                <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='tax_id']" position="after">
+                    <field name="image" widget="image"/>
+                </xpath>
+                <xpath expr="//field[@name='country_code']" position="before">
+                    <field name="checking_date"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="nick_name" />
+                </xpath>
+                <xpath expr="//form/header" position="inside">
+                        <button name="action_generate_sale_report" string="Generate Sale Report" type="object" class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" class="btn-primary" groups="Online_shopping.shopping_groups_manager_access"/>
+                </xpath>
+                <xpath expr="//form/header/field[@widget='statusbar']" position="attributes">
+                    <attribute name="statusbar_visible">draft,sent,to_approve,sale</attribute>
+                </xpath>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="js_class">model_info</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="product_template_form_view_inherited" model="ir.ui.view">
+            <field name="name">product.template.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[name=']" position="inside">
+                    <field name="price_multiplier"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- Email Customer View -->
+        <record id="email_customer_view_my" model="ir.ui.view">
+            <field name="name">product.template.ebay.tree.my</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <group>
+                        <field name="customer_rank" invisible="1"/>
+                    </group>
+                    <header>
+                        <button string="Send Mail" name="action_send_email" type="object" class="oe_highlight" invisible="customer_rank == 0"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Commission Inherited View -->
+        <record id="commission_inherited_id" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="banner_route">/onboarding/sale_quotation</attribute>
+                </xpath>
+                <xpath expr="//tree" position="inside">
+                <field name="commission" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Page View Inherited -->
+        <record id="page_view_inherited" model="ir.ui.view">
+            <field name="name">page.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Commission">
+                        <group>
+                            <field name="commission_amount_on" />
+                            <field name="percentage"/>
+                            <field name="dob" />
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="is_sundry_customer"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- HR Expense Tree View Inherit -->
+        <record id="view_hr_expense_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.expense</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_view_expenses_analysis_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="js_class">model_hr</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- POS Order Form Inherit -->
+        <record id="view_pos_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.pos.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='session_id']" position="after">
+                   <field name="note" />
+                   <field name="location" />
+                   <field name="discount" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- POS Setting Form Inherit -->
+        <record id="view_pos_setting_form_inherit" model="ir.ui.view">
+            <field name="name">setting.pos.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pos_payment_method_ids']" position="after">
+                    <group>
+                        <field name="discount"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- POS Discount Section -->
+        <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.point_of_sale</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="95"/>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//app/div/block[@id='pos_pricing_section']" position="after">
+                    <block title="Discount" id="pos_discount_section">
+                        <div>
+                            <group>
+                                <field name="discount"/>
+                                <field name="location_id" />
+                            </group>
+                        </div>
+                    </block>
+                </xpath>
+            </field>   
+        </record>
+
+        <!-- Sale Limit Group -->
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">setting.sale.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='module_sale_margin']" position="after">
+                    <group>
+                        <field name="sale_limit"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Approve Sale Action -->
+        <record id="action_approve_sale_inherit" model="ir.actions.act_window">
+            <field name="name">Approve Sale</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target"></field>
+            <field name="domain">[('state', '=', 'to_approve')]</field>
+        </record>
+
+        <!-- Approve Sale Menuitem -->
+        <menuitem 
+                id="menu_sale_approve_my"
+                name="Approve"
+                parent="sale.sale_order_menu"
+                action="action_approve_sale_inherit"
+                groups="Online_shopping.shopping_groups_manager_access"/>
+    </data>
+</odoo>

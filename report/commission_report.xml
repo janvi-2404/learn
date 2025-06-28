@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_filter_data">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="o">
+               <t t-call="web.external_layout">
+                    <div class="oe_structure"/>
+                    <div>
+                        <h3>Commission Report: <t t-esc="o.sales_person_id.name"/></h3>
+                        <p>From Date: <t t-esc="o.start_date"/><br></br>
+                           To Date: <t t-esc="o.end_date"/></p>
+                    </div>
+                                        
+                    <table class="table table-sm o_main_table table-borderless mt-4" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Customer Name</th>
+                                <th>Commission</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.sale_order_ids" t-as="t">
+                                <tr>
+                                    <td><t t-esc="t.order_id"/></td>
+                                    <td><t t-esc="t.customer_name"/></td>
+                                    <td><t t-esc="t.commission"/></td>
+                                    <td><t t-esc="t.total"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <hr></hr>
+                    <div id="total" class="row justify-content-end">
+                        <div class="col-4 text-end">
+                            <table class="table table-sm table-borderless">
+                                <div class="text-danger">Total Commission: <span t-field="o.total_commission"></span></div>
+                                <div class="text-success">Total Amount: <span t-field="o.total_amount" class="text-success"></span></div>                                              
+                            </table>
+                        </div>
+                    </div> 
+               </t>
+           </t>
+       </t>
+   </template>
+</odoo>

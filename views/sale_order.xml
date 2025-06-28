@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <template id="sale_order" name="Sale Order template">
+        <t t-call="website.layout">
+            <div>
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">SalesPerson</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="sale_data" t-as="order">
+                            <tr>
+                                <td><t t-esc="order.name"/></td>
+                                <td><t t-esc="order.partner_id.name"/></td>
+                                <td><t t-esc="order.user_id.name"/></td>
+                                <td><t t-esc="order.amount_total"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            </t>
+    </template>
+</odoo>

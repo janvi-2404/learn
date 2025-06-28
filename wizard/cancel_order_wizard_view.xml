@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cancel_order" model="ir.ui.view">
+            <field name="name">cancel.order.wizard.view</field>
+            <field name="model">cancel.order.wizard</field>
+            <field name="arch" type="xml">
+                <form string="cancel order">
+                    <sheet>
+                        <group>
+                            <field name="password"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel Order" name="cancel_order" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sequence_order" model="ir.sequence">
+            <field name="name">Order Sequence</field>
+            <field name="code">product.order</field>
+            <field name="prefix">ORD</field>
+            <field name="padding">3</field>
+        </record>
+
+        <record id="view_product_order_search" model="ir.ui.view">
+            <field name="name">product.order.search.view</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Product">
+
+                    <field name="state" string="Product Status"/>
+                    <field name="payment_method" string="Payment Method"/>
+
+                    <field name="payment_status" string="Payment Status"/>
+                    <filter string="Payment Done" name="paid"
+                            domain="[('payment_status', '=', 'paid')]"/>
+                    <filter string="Payment Pending" name="unpaid"
+                            domain="[('payment_status', '=', 'unpaid')]"/>
+                    <filter name="Payment Method" string="Debit Card"
+                            domain="[('payment_method', '=', 'debit_card')]"/>
+                    <filter name="Payment Method" string="Credit Card"
+                            domain="[('payment_method', '=', 'credit_card')]"/>
+                    <filter name="Payment Method" string="UPI"
+                            domain="[('payment_method', '=', 'upi')]"/>
+                    <filter name="Payment Method" string="Cash on Delivery"
+                            domain="[('payment_method', '=', 'cash_on_delivery')]"/>
+
+                    <filter string="Product Draft" name="Draft"
+                            domain="[('state', '=', 'draft')]"/>
+                    <filter string="Product Confirmed" name="Confirmed"
+                            domain="[('state', '=', 'confirmed')]"/>
+                    <filter string="Product Done" name="Done"
+                            domain="[('state', '=', 'done')]"/>
+                    <filter string="Payment Cancel" name="Cancel"
+                            domain="[('state', '=', 'cancel')]"/>
+                    <searchpanel>
+                        <field name="payment_status" string="Payment Status" enable_counters="1"/>
+                        <field name="payment_method" string="Payment Method" enable_counters="1"/>
+                        <field name="state" string="Product Status" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_order_form" model="ir.ui.view">
+            <field name="name">Order Form</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <form string="Order Form" js_class="auto_save">
+                    <header>
+                        <field name="state" widget="statusbar"  options="{'clickable' : '1'}" />
+                        <button name="confirm_order" string="Confirm Order" type="object" class="btn-primary"/>
+                        <button string="Cancel Order" name="cancel_order_wizard" type="object" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="customer_id"
+                                    widget="res_partner_<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sequence_order" model="ir.sequence">
+            <field name="name">Order Sequence</field>
+            <field name="code">product.order</field>
+            <field name="prefix">ORD</field>
+            <field name="padding">3</field>
+        </record>
+
+        <record id="view_product_order_search" model="ir.ui.view">
+            <field name="name">product.order.search.view</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Product">
+
+                    <field name="state" string="Product Status"/>
+                    <field name="payment_method" string="Payment Method"/>
+
+                    <field name="payment_status" string="Payment Status"/>
+                    <filter string="Payment Done" name="paid"
+                            domain="[('payment_status', '=', 'paid')]"/>
+                    <filter string="Payment Pending" name="unpaid"
+                            domain="[('payment_status', '=', 'unpaid')]"/>
+                    <filter name="Payment Method" string="Debit Card"
+                            domain="[('payment_method', '=', 'debit_card')]"/>
+                    <filter name="Payment Method" string="Credit Card"
+                            domain="[('payment_method', '=', 'credit_card')]"/>
+                    <filter name="Payment Method" string="UPI"
+                            domain="[('payment_method', '=', 'upi')]"/>
+                    <filter name="Payment Method" string="Cash on Delivery"
+                            domain="[('payment_method', '=', 'cash_on_delivery')]"/>
+
+                    <filter string="Product Draft" name="Draft"
+                            domain="[('state', '=', 'draft')]"/>
+                    <filter string="Product Confirmed" name="Confirmed"
+                            domain="[('state', '=', 'confirmed')]"/>
+                    <filter string="Product Done" name="Done"
+                            domain="[('state', '=', 'done')]"/>
+                    <filter string="Payment Cancel" name="Cancel"
+                            domain="[('state', '=', 'cancel')]"/>
+                    <searchpanel>
+                        <field name="payment_status" string="Payment Status" enable_counters="1"/>
+                        <field name="payment_method" string="Payment Method" enable_counters="1"/>
+                        <field name="state" string="Product Status" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_order_form" model="ir.ui.view">
+            <field name="name">Order Form</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <form string="Order Form" js_class="auto_save">
+                    <header>
+                        <field name="state" widget="statusbar"  options="{'clickable' : '1'}" />
+                        <button name="confirm_order" string="Confirm Order" type="object" class="btn-primary"/>
+                        <button string="Cancel Order" name="cancel_order_wizard" type="object" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="customer_id"
+                                    widget="res_partner_many2one"/>
+                            <field name="state"/>
+                            <field name="order_date"/>
+                            <field name="payment_method"/>
+                            <field name="payment_status"/>
+                            <field name="total_amount"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="orderId"/>
+                        </group>
+                        <notebook>
+                            <page string="Order Items">
+                                <field name="order_item_ids" mode="tree" string="Order Items" >
+                                    <tree editable="bottom">
+                                        <field name="product_id" />
+                                        <field name="order_id" />
+                                        <field name="quantity" />
+                                        <field name="price_unit" />
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="price_subtotal" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_order_tree" model="ir.ui.view">
+            <field name="name">Order Tree</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <tree string="Order Tree" js_class="select_all">
+                    <field name="customer_id"/>
+                    <field name="state"/>
+                    <field name="order_date"/>
+                    <field name="payment_method"/>
+                    <field name="customer_email"/>
+                    <field name="customer_address"/>
+                    <field name="payment_status"/>
+                    <field name="order_item_ids" widget="many2many_tags"/>
+                    <field name="total_amount"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="orderId"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-warning="state == 'draft'" decoration-info="state == 'confirmed'"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_order_calendar" model="ir.ui.view">
+            <field name="name">Order Calendar</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Order Calendar" date_start="create_date" date_stop="create_date" color="customer_id">
+                    <field name="order_date"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_order_form" model="ir.actions.act_window">
+            <field name="name">Order</field>
+            <field name="res_model">product.order</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="menu_order_form"
+            name="Order"
+            parent="menu_order_folder"
+            action="action_order_form"/>
+
+    </data>
+</odoo>
+
+many2one"/>
+                            <field name="state"/>
+                            <field name="order_date"/>
+                            <field name="payment_method"/>
+                            <field name="payment_status"/>
+                            <field name="total_amount"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="orderId"/>
+                        </group>
+                        <notebook>
+                            <page string="Order Items">
+                                <field name="order_item_ids" mode="tree" string="Order Items" >
+                                    <tree editable="bottom">
+                                        <field name="order_id" />
+                                        <field name="product_id" />
+                                        <field name="quantity" />
+                                        <field name="price_unit" />
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="price_subtotal" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_order_tree" model="ir.ui.view">
+            <field name="name">Order Tree</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <tree string="Order Tree" js_class="select_all">
+                    <field name="customer_id"/>
+                    <field name="state"/>
+                    <field name="order_date"/>
+                    <field name="payment_method"/>
+                    <field name="customer_email"/>
+                    <field name="customer_address"/>
+                    <field name="payment_status"/>
+                    <field name="order_item_ids" widget="many2many_tags"/>
+                    <field name="total_amount"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="orderId"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" decoration-warning="state == 'draft'" decoration-info="state == 'confirmed'"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_order_calendar" model="ir.ui.view">
+            <field name="name">Order Calendar</field>
+            <field name="model">product.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Order Calendar" date_start="create_date" date_stop="create_date" color="customer_id">
+                    <field name="order_date"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_order_form" model="ir.actions.act_window">
+            <field name="name">Order</field>
+            <field name="res_model">product.order</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="menu_order_form"
+            name="Order"
+            parent="menu_order_folder"
+            action="action_order_form"/>
+
+    </data>
+</odoo>
+

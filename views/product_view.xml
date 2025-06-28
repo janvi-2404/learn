@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Define the sequence for order IDs -->
+        <record id="sequence_product" model="ir.sequence">
+            <field name="name">Product Sequence</field>
+            <field name="code">my.product.product</field>
+            <field name="prefix">PRD</field>
+            <field name="padding">3</field>
+        </record>
+
+        <record id="view_product_form" model="ir.ui.view">
+            <field name="name">Product Form</field>
+            <field name="model">my.product.product</field>
+            <field name="arch" type="xml">
+                <form string="Product Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="image" widget="image" class="oe_avatar" position="after"/>
+                                <field name="name"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="productId"/>
+                                <field name="category_id"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="price"/>
+                            </group>
+                        </group>   
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_tree" model="ir.ui.view">
+            <field name="name">Product Tree</field>
+            <field name="model">my.product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Product Tree">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="price"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="category_id"/>
+                    <field name="image"/>
+                    <field name="productId"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_kanban" model="ir.ui.view">
+            <field name="name">product.kanban.view</field>
+            <field name="model">my.product.product</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="image"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_image">
+                                    <img t-att-src="kanban_image('my.product.product', 'photo', record.id.raw_value)" alt="....."/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="productId"/><br/><field name="name"/></strong>
+                                    <div>Category: <field name="category_id"/></div>
+                                    <div>Price: <field name="price"/></div>
+                                    <div>Description: <field name="description"/></div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_product_form" model="ir.actions.act_window">
+            <field name="name">Product</field>
+            <field name="res_model">my.product.product</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem id="menu_product_form" 
+            name="Product" 
+            parent="menu_product_folder" 
+            action="action_product_form"/>
+        
+    </data>
+</odoo>

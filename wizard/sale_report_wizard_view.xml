@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_sale_report_wizard_form" model="ir.ui.view">
+        <field name="name">sale.report.wizard.form</field>
+        <field name="model">sale.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Sale Report">
+                <group>
+                    <field name="order_id" 
+                    invisible="1"
+                    />
+                    <field name="sale_order_line_ids" widget="many2many_tags" string="Sale Order Lines" 
+                    domain="[('order_id', '=', order_id)]"
+                    />
+                </group>
+                <footer>
+                    <button name="report" string="Generate Report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

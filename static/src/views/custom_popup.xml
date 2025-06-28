@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="Online_shopping.CustomDropDownPopup" owl="1">
+        <div class="popup custom_popup">
+            <div class="modal-header justify-content-center">
+                <h2 class="modal-title">
+                    <t t-esc="props.title"/>
+                </h2>
+            </div>
+            <div class="modal-body custom-form-view">       
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Location:</label>
+                        <select class="form-control" id="exampleFormControlSelect1" t-model="state.inputValue">
+                            <option>Select Locations</option>
+                            <t t-foreach="props.locations" t-as="location" t-key="props.locations">
+                                <option t-esc="location"/>
+                            </t>
+                        </select>
+                    </div>
+                    <!-- <label for="location">Location:</label>
+                    <select name="location" id="location">
+                        <t t-foreach="props.locations" t-as="location" t-key="props.locations">
+                            <option t-esc="location"/>
+                        </t>
+                    </select> -->
+                </form>
+            </div>
+            <div>
+                <div class="button confirm highlight btn btn-lg btn-primary" t-on-click="confirm">
+                    <t t-esc="props.confirmText" />
+                </div>
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                    <t t-esc="props.cancelText" />
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

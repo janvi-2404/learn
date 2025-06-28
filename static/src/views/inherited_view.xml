@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="Online_shopping.modelInfoBtn" t-inherit="web.FormView">
+        <xpath expr="//t[@t-set-slot='layout-actions']" position="inside">
+            <button class="btn btn-outline-danger" 
+                    t-on-click="actionInfoForm">
+                Info
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="Online_shopping.NewButton" t-inherit="hr_expense.ListButtons" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
+            <button class="d-none d-md-block btn btn-outline-success"
+                    t-on-click="actionNewButton">
+                New Create Report 
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="Online_shopping.ReportButton" t-inherit="planning.PlanningGanttView.Buttons" t-inherit-mode="extension">
+        <xpath expr="//div" position="after">
+            <button class="d-none d-md-block btn btn-outline-warning"
+                    t-on-click="planningButton">
+                New Create Report 
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="Online_shopping.modelIconForm" t-inherit="web.FormStatusIndicator" t-inherit-mode="primary">
+        <xpath expr="//div[@class='o_form_status_indicator_buttons d-flex']" position="inside">
+            <button type="button" class="o_form_button_cancel btn btn-light px-1 py-0 lh-sm" t-on-click="actionFormIcon">
+                <i class="fa fa-solid fa-user"></i>
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="Online_shopping.autoSave" t-inherit="web.FormView">
+        <xpath expr="//div[@t-att-class='className']/div/Layout/t[@t-set-slot='layout-buttons']" position="inside">
+            <button class="btn btn-outline-dark"
+                    t-on-click="autoSave" >
+                Select All 
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="Online_shopping.selectAll" t-inherit="web.ListView">
+        <xpath expr="//div[@t-att-class='className']/Layout/t[@t-set-slot='layout-buttons']" position="inside">
+            <button class="btn btn-outline-dark"
+                    t-on-click="selectAll" >
+                Select All 
+            </button>
+        </xpath>
+    </t>
+
+    
+
+
+</templates>

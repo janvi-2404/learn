@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="order_item_form_view" model="ir.ui.view">
+            <field name="name">order.item.form.view</field>
+            <field name="model">order.item</field>
+            <field name="arch" type="xml">
+                <form string="Order Item Form">
+                    <sheet>
+                        <group>
+                            <field name="order_id"/>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <field name="price_unit"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="price_subtotal"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="order_item_tree_view" model="ir.ui.view">
+            <field name="name">order.item.tree.view</field>
+            <field name="model">order.item</field>
+            <field name="arch" type="xml">
+                <tree string="Order Item Tree">
+                    <field name="order_id"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="price_unit"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="price_subtotal" widget="monetary"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_order_item" model="ir.actions.act_window">
+            <field name="name">Order Item</field>
+            <field name="res_model">order.item</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem 
+                id="menu_order_item_form" 
+                name="Order Item" 
+                parent="order_item_menu" 
+                action="action_order_item"/>      
+    </data>
+</odoo>

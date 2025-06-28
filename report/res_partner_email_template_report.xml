@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="res_partner_report">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="o">
+               <t t-call="web.external_layout">
+
+                    <div class="page">
+                       <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-6">
+                                <h3 class="text-capitalize">Name: <t t-esc="o.name"/></h3>
+                                <p class="fs-5">GSTIN: <t t-esc="o.vat"/></p>
+                            </div>
+                            <div class="col-6">
+                                <p>Phone No.: <t t-esc="o.phone"/><br></br>
+                                Email: <t t-esc="o.email"/><br></br>
+                                website: <t t-esc="o.website"/></p>
+                            </div>
+                        </div>
+                        <t t-foreach="o.category_id" t-as="c">
+                            <span class="badge text-bg-success" t-field="c.name"></span>
+                        </t>
+                    </div>
+               </t>
+           </t>
+       </t>
+   </template>
+</odoo>

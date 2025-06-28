@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.LocationButton">
+        <button t-att-class="`control-button btn btn-light rounded-0 fw-bolder ${this.getLocation()}`" t-on-click="() => this.onLocationButton()">
+            <i class="fa fa-location" role="img" aria-label="Add Location Button" title="Add Location Button"/>
+                <!-- <span>Location</span> -->
+                <span t-esc="state.selectedLocation"/>
+        </button>
+    </t>
+</templates>

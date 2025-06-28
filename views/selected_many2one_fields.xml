@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_module_model_selector_form" model="ir.ui.view">
+        <field name="name">module.model.selector.form</field>
+        <field name="model">module.model.selector</field>
+        <field name="arch" type="xml">
+            <form string="Module and Model Selector">
+                <group>
+                    <field name="selected_module"/>
+                    <field name="selected_model"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_module_model_selector" model="ir.actions.act_window">
+        <field name="name">Module and Model Selector</field>
+        <field name="res_model">module.model.selector</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="menu_module_model_selector" name="Module and Model Selector" parent="menu_module_folder" action="action_module_model_selector"/>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="commission_selected_view_tree" model="ir.ui.view">
+            <field name="name">commission.view.tree</field>
+            <field name="model">commission.on.line</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="order_id"/>
+                    <field name="customer_name"/>
+                    <field name="order_date" />
+                    <field name="commission"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+       
+        <record id="commission_selected_view_form" model="ir.ui.view">
+            <field name="name">commission.order.form.view</field>
+            <field name="model">commission.on.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="order_id"/>
+                            <field name="customer_name" />
+                            <field name="commission"/>
+                            <field name="total"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sale_commission" model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">commission.on.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="commission_selected_view_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No order added.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="online_commission_menu"
+                name="Commission On Line "
+                parent="menu_sale_commission"
+                action="action_sale_commission"/>
+    </data>
+</odoo>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="mail_res_partner_template_blog" model="mail.template">
+            <field name="name">Email Template Partner</field>
+            <field name="model_id" ref="sale.model_res_partner"/>
+            <field name="email_from">{{user.email_formatted}}</field>
+            <field name="email_to">{{object.email}}</field>
+            <field name="report_template_ids" eval="[(4, ref('Online_shopping.action_res_partner'))]"/>
+            <field name="subject">Mail Template: Demo Mail</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;width:40%">
+                        <h5>
+                            Hello Brother,
+                        </h5>
+                    </div>
+                    <br/>
+                    Best Wishes,
+                    <br/>
+                    <t t-out="user.name"/>
+                    <br/>
+                </div>
+            </field>
+        </record>
+
+        <record id="renew_bday_template" model="mail.template">
+            <field name="name">Bday: Wishes Mail</field>
+            <field name="email_from">{{user.email}}</field>
+            <field name="model_id" ref="Online_shopping.model_my_customer_customer"/>
+            <!-- <field name="model_id" ref="Online_shopping.model_res_partner"/> -->
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div>
+                        <h5>
+                            Hello <t t-out="object.name"/>
+                        </h5>
+                    </div>
+                    <div>
+                        <p>Wishing you a very happy birthday!
+                        <br/><br/>
+                        May you achieve more success in your life.
+                        <!-- <br/><br/>
+                        Enjoy your day. -->
+                        </p> 
+                    </div>
+                    <br/>
+                    Best Wishes,
+                    <br/>
+                    <t t-out="user.name"/>
+                    <br/>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_template_sale_report" model="mail.template">
+            <field name="name">Monthly Report</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <!-- <field name="model_id" ref="sale.model_sale_order"/> -->
+            <!-- <field name="email_from">${(object.user.email or '').strip()}</field> -->
+            <field name="subject">Monthly Report</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; border-radius: 5px; font-size:13px;width:40%">
+                        <div>
+                            Hello <t t-out="object.name"/>,<br></br>
+                            This is your ,Monthly report.
+                        </div>
+                        <br/>
+                        Your Fathfully,
+                        <br/>
+                        <t t-out="user.name"/>
+                    </div>
+                    <br/>
+                </div>
+            </field>
+        </record>
+
+        <record id="send_order_confirmation" model="mail.template">
+            <field name="name">Order Confirmation Email</field>
+            <field name="email_from">{{user.email}}</field> 
+            <field name="email_to">{{object.customer_id.email}}</field>
+            <field name="subject">Order Confirmation</field> 
+            <field name="model_id" ref="model_product_order"/>
+            <field name="auto_delete" eval="False"/> 
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; border-radius: 5px; font-size:13px;width:40%">
+                        <div>
+                            Hello,
+                            <p>
+                                Your order is confirmed.
+                                <br/><br/>
+                                Your order reference: <t t-out="object.orderId"/>
+                                <br/><br/>
+                                Thank you for ordering.
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="view_commission_form" model="ir.ui.view">
+            <field name="name">commission.form</field>
+            <field name="model">commission</field>
+            <field name="arch" type="xml">
+                <form string="Commission">
+                    <sheet>
+                        <group>
+                            <field name="sales_person_id"/>
+                            <field name="start_date" />
+                            <field name="end_date"/>
+                        </group>
+                        <button name="compute_commission_totals" string="Calculate Commission" type="object" class="oe_highlight"/>
+                        <notebook>
+                            <page string="Sale Orders">
+                                <field name="sale_order_ids" />
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="total_commission"/>
+                            <field name="total_amount" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_commissions" model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">commission</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem id="commission_menu"
+                name="Commission"
+                parent="menu_sale_commission"
+                action="action_commissions"/>
+                
+    </data>
+</odoo>

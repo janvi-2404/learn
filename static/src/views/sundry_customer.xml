@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="point_of_sale.sundryCustomer" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('top-right-buttons')]" position="inside">
+            <button class="btn btn-outline-dark"
+                    t-on-click="() => this.onSundeyCustomer()">
+                Sundry Customer
+            </button>
+        </xpath>
+    </t>    
+</templates>

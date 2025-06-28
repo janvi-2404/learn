@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="report_product_order">
+       <t t-call="web.html_container">
+           <t t-foreach="docs" t-as="o">
+               <t t-call="web.external_layout">
+                   <div class="page">
+                        <div class="oe_structure">
+                            <h1>Order Report</h1>
+                            <h2>Order ID: <t t-esc="o.orderId"/></h2>
+                            <h3>Name: <t style="text-transform: uppercase;" t-esc="o.customer_id"/></h3>
+                            <h3>Email: <t style="text-transform: uppercase;" t-esc="o.customer_email"/></h3>
+                            <h3>Customer Address: <t style="text-transform: uppercase;" t-esc="o.customer_address"/></h3>
+                            <table class="table table-sm o_main_table table-borderless mt-4" style="text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.order_item_ids" t-as="order">
+                                        <tr>
+                                            <td><t t-esc="order.product_id"/></td>
+                                            <td><t t-esc="order.quantity"/></td>
+                                            <td><t t-esc="order.price_unit"/></td>
+                                            <td><t t-esc="order.price_subtotal"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                   </div>
+               </t>
+           </t>
+       </t>
+   </template>
+</odoo>

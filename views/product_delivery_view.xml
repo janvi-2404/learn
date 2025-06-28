@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+        <record id="view_product_delivery_search" model="ir.ui.view">
+            <field name="name">product.delivery.me.search.view</field>
+            <field name="model">product.delivery.me</field>
+            <field name="arch" type="xml">
+                <search string="Search Product">
+                    <!-- Search fields -->
+                    <field name="state" string="Order Status"/>
+
+                    <!-- Filters -->
+                    <filter string="Ordered" name="ordered"
+                            domain="[('state', '=', 'ordered')]"/>
+                    <filter string="Delivered" name="delivered"
+                            domain="[('state', '=', 'delivered')]"/>
+                    <searchpanel>
+                        <field name="state" string="Product Status" enable_counters="1"/>
+                    </searchpanel>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_state" context="{'group_by': 'state'}"/>
+                        <filter name="group_by_Payment" context="{'group_by': 'payment'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="sequence_product_delivery" model="ir.sequence">
+            <field name="name">Delivery Sequence</field>
+            <field name="code">product.delivery.me</field>
+            <field name="prefix">DEL</field>
+            <field name="padding">3</field>
+        </record>
+       
+        <record id="view_product_delivery_tree" model="ir.ui.view">
+            <field name="name">product.delivery.me.tree</field>
+            <field name="model">product.delivery.me</field>
+            <field name="arch" type="xml">
+                <tree string="Product Delivery">
+                    <field name="deliveryId"/>
+                    <field name="order_id"/>
+                    <field name="customer_id"/>
+                    <field name="delivery_date"/>
+                    <field name="payment"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_delivery_form" model="ir.ui.view">
+            <field name="name">product.delivery.me.form</field>
+            <field name="model">product.delivery.me</field>
+            <field name="arch" type="xml">
+                <form string="Product Delivery">
+                    <sheet>
+                        <group>
+                            <field name="deliveryId"/>
+                            <field name="order_id"/>
+                            <field name="customer_id"/>
+                            <field name="delivery_date"/>
+                            <field name="payment"/>
+                            <field name="state"/>                       
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_delivery_form" model="ir.actions.act_window">
+            <field name="name">Product Delivery</field>
+            <field name="res_model">product.delivery.me</field>
+            <field name="view_mode">tree,form</field> 
+        </record>
+        
+        <menuitem id="menu_product_delivery_form" 
+            name="Product Delivery" 
+            parent="menu_product_delivery_folder" 
+            action="action_product_delivery_form"/>
+            
+    </data>
+</odoo>

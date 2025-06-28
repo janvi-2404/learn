@@ -1,0 +1,71 @@
+<odoo>
+        <!-- main menu -->
+        <menuitem 
+                id="root_menu" 
+                name="Online Shopping"/>
+
+        <!-- order menu -->
+        <menuitem 
+                id="menu_order_folder" 
+                name="Order" 
+                parent="root_menu"
+                />
+
+        <!-- product menu -->
+        <menuitem 
+                id="menu_product_folder" 
+                name="Product" 
+                parent="root_menu"/>
+
+        <!-- order item menu -->
+        <menuitem 
+                id="order_item_menu" 
+                name="Order Item" 
+                parent="root_menu"/>
+
+        <!-- category menu -->
+        <menuitem 
+                id="category_menu" 
+                name="Product Category" 
+                parent="root_menu"/>
+
+        <!-- customer menu -->
+        <menuitem 
+                id="customer_menu" 
+                name="Customer" 
+                parent="root_menu"/>
+
+        <!-- Many2one -->
+        <menuitem 
+                id="menu_module_folder" 
+                name="Model" 
+                parent="root_menu"/>
+
+        <!-- product delivery menu -->
+        <menuitem 
+                id="menu_product_delivery_folder" 
+                name="Product Delivery" 
+                parent="root_menu"/>
+
+        <menuitem 
+                id="stock_menu" 
+                name="Stock" 
+                parent="root_menu"/>
+
+        <!-- sale module custom menu -->
+        <menuitem 
+                id="menu_sale_commission"
+                name="Commission"
+                parent="sale.sale_menu_root"/>
+
+        <menuitem 
+                id="menu_excel_report"
+                name="Excel Report"
+                parent="sale.menu_sale_report"
+                action="action_commission_sale_wizard_my"/>
+
+        <menuitem id="menu_config"
+            name="Configuration"
+            parent="root_menu"/>
+
+</odoo>
